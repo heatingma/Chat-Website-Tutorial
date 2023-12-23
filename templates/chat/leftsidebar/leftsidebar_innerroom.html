@@ -65,7 +65,7 @@
                                     {% for tag in tags %}
                                         <option value="{{ tag.name }}">{{ tag.name }}</option>
                                     {% endfor %}
-                                  </select>
+                                </select>
                             </div>
                             <!-- TAGS -->
 
@@ -118,16 +118,14 @@
         <li><a href="{% url 'chat:innerroom' room_name=post.belong_room.name post_name=post.title %}?{{'dark'}}={{dark}}"><div class="media align-items-center">
 
             <!-- SYMBOL IMG -->
-            <div class="chat-user-img mr-3 avatar-xs">
-                <span class="avatar-title rounded-circle bg-soft-primary text-primary">
-                    {{ post.initial }}
-                </span>
+            <div class="mr-3">
+                <img src="{{post.image_url}}" class="rounded-circle avatar-xs" alt="">
             </div>
             <!-- SYMBOL IMG -->
                 
             <!-- BODY -->
             <div class="media-body overflow-hidden">
-                <h5 class="text-truncate font-size-14 mb-0">#{{ post.title }}</h5>
+                <h5 class="text-truncate font-size-14 mb-0">#{{ post.show_name }}</h5>
             </div>
             <!-- BODY -->
 

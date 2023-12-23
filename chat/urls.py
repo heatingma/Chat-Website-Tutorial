@@ -1,10 +1,10 @@
 
 from django.urls import path
-from chat import views
+from chat.views import chatroom, innerroom, my, settings
 
 urlpatterns = [
-    path('my/', views.my, name='my'),
-    path('settings/', views.settings, name='settings'),
-    path('chatroom/', views.chatroom, name='chatroom'),
-    path('chatroom/<str:room_name>/<str:post_name>/', views.innerroom, name='innerroom'),
+    path('my/', my, name='my'),
+    path('settings/', settings, name='settings'),
+    path('chatroom/', chatroom, name='chatroom'),
+    path('chatroom/<str:room_name>/<str:post_name>/', innerroom, name='innerroom'),
 ]

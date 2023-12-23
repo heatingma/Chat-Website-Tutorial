@@ -1,32 +1,11 @@
-from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
-from .forms import EditProfileForm, PasswordChangeForm
-from .models import Profile
+from django.shortcuts import render, get_object_or_404, redirect
+from chat.forms import EditProfileForm, PasswordChangeForm
+from chat.models import Profile
 from users.models import User
 
-
-@login_required
-def my(request: HttpRequest, dark=False):
-    # judge the dark or light model
-    if request.GET:
-        dark = request.GET['dark']
-        dark = False if dark == 'False' else True
-
-    username = request.user.username
-    user = get_object_or_404(User, username=username)
-    profile = get_object_or_404(Profile, user=user)
-            
-    return render(
-        request=request, 
-        template_name='chat/my.html', 
-        context={
-            'profile': profile,
-            'dark': dark,
-            'light': not dark,
-        }
-    )
 
 @login_required
 def settings(request: HttpRequest, dark=False):
@@ -91,13 +70,3 @@ def settings(request: HttpRequest, dark=False):
         }
     )
     
-    
-
-@login_required
-def chatroom(request: HttpRequest, dark=False):
-    pass
-    
-    
-@login_required
-def innerroom(request: HttpRequest, room_name, post_name, dark=False):
-   pass
