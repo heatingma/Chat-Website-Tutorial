@@ -23,6 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path('', include(('users.urls', 'users'), namespace='users'), name='users'),
+    path('chat/', include(('chat.urls', 'chat'), namespace='chat')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

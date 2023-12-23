@@ -1,0 +1,132 @@
+<div>
+                        
+    <!-- CHATROOM HEAD -->
+    <div class="p-4">
+
+        <!-- CHATROOM NAV -->
+        <div class="user-chat-nav float-right">
+            <div data-toggle="tooltip" data-placement="bottom" title="Create chatroom">
+                <button type="button" class="btn btn-link text-decoration-none text-muted font-size-18 py-0" data-toggle="modal" data-target="#addchatroom-exampleModal">
+                    <i class="ri-add-circle-line mr-1"></i>
+                </button>
+            </div>
+        </div>
+        <!-- CHATROOM NAV -->
+
+        <!-- CHATROOM TITLE -->
+        <h4 class="mb-4">Chatrooms</h4>
+        <!-- CHATROOM TITLE -->
+
+
+        <!-- CREATE CHATROOM -->
+        <div class="modal fade" id="addchatroom-exampleModal" tabindex="-1" role="dialog" aria-labelledby="addchatroom-exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                <form class="modal-content" method="post" enctype="multipart/form-data" action="{% url 'chat:chatroom' %}?dark={{dark}}">
+                    {% csrf_token %}
+                    <!-- CREATE HEAD -->
+                    <div class="modal-header">
+                        <h5 class="modal-title font-size-16" id="addchatroom-exampleModalLabel">Create New Chatroom</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <!-- CREATE HEAD -->
+
+                    <!-- CREATE BODY -->
+                    <div class="modal-body p-4">
+                        <div>
+
+                            <!-- CHATROOM NAME -->
+                            <div class="form-chatroom mb-4">
+                                <label for="addchatroomname-input">Chatroom Name</label>
+                                <input type="text" class="form-control" id="addchatroomname-input" name="name" placeholder="Enter Chatroom Name">
+                            </div>
+                            <!-- CHATROOM NAME -->
+
+                            <!-- CHATROOM DESCRIPTION-->
+                            <div class="form-group">
+                                <label for="add-chatroom-description-input">Description</label>
+                                <textarea class="form-control" id="add-chatroom-description-input" rows="3" name="about_room" placeholder="Enter Description"></textarea>
+                            </div>
+                            <!-- CHATROOM DESCRIPTION-->
+
+                            <!-- IMAGE -->
+                            <div class="form-group">
+                                <label for="change-avatar">Upload Chatroom Image(Do not exceed 5M)</label>
+                                <input type="file" class="form-control upload-button" id="image" name="image" accept="image/*">
+                            </div>
+                            <!-- IMAGE -->
+
+                        </div>
+                    </div>
+                    <!-- CREATE BODY -->
+
+                    <!-- CREATE BUTTON -->
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-link" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Create Chatroom</button>
+                    </div>
+                    <!-- CREATE BUTTON -->
+
+                </form>
+            </div>
+        </div>
+        <!-- CREATE CHATROOM -->
+
+        <!-- SEARCH BOX -->
+        <div class="search-box chat-search-box">
+            <div class="input-group bg-light  input-group-lg rounded-lg">
+                <div class="input-group-prepend">
+                    <button class="btn btn-link text-decoration-none text-muted pr-1" type="button">
+                        <i class="ri-search-line search-icon font-size-18"></i>
+                    </button>
+                </div>
+                <input type="text" class="form-control bg-light" placeholder="Search chatrooms...">
+            </div>
+        </div>
+        <!-- SEARCH BOX -->
+
+    </div>
+    <!-- CHATROOM HEAD -->
+        
+    <!-- CHATROOM INFO -->
+    <div class="p-4 chat-message-list chat-chatroom-list" data-simplebar="">
+    <ul class="list-unstyled chat-list">
+        {% for room in rooms %}
+        <!-- ONE EXAMPLE -->
+        <li><a href="{% url 'chat:innerroom' room_name=room.name post_name='chatting_'|add:room.name%}?{{'dark'}}={{dark}}"><div class="media align-items-center">
+
+            <!-- SYMBOL IMG -->
+            <div class="chat-user-img mr-3 avatar-xs">
+                <span class="avatar-title rounded-circle bg-soft-primary text-primary">
+                    {{ room.initial }}
+                </span>
+            </div>
+            <!-- SYMBOL IMG -->
+                
+            <!-- BODY -->
+            <div class="media-body overflow-hidden">
+                <h5 class="text-truncate font-size-14 mb-0">{{ room.name }}</h5>
+            </div>
+            <!-- BODY -->
+
+        </div></a></li>
+        <!-- ONE EXAMPLE -->
+        {% endfor %}
+    </ul></div>
+    <!-- CHATROOM INFO -->
+   
+</div>
+
+{% if wrong_message != "" %}
+<div class="error-box" style="width:250px; height:160px">
+    <div class="error-body">
+        <p>{{ wrong_message }}</p>
+    </div>
+    <div class="error-close">
+        <button class="close-button" id="close">
+            close
+        </button>
+    </div>
+</div>
+{% endif %}

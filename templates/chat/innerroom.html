@@ -1,0 +1,37 @@
+{% extends 'chat/base.html' %}
+
+<!-- side_menu -->
+{% block side_menu %}
+    {% include "chat/side_menus/side_menu_chatroom.html" %}
+{% endblock %}
+<!-- side_menu -->
+
+
+<!-- leftsidebar -->
+{% block leftsidebar %}
+    {% include "chat/leftsidebar/leftsidebar_innerroom.html" %}
+{% endblock %}
+<!-- leftsidebar -->
+
+
+<!-- body -->
+
+{% block chat_conversation %}
+    {% if chatting_post %}
+        {% include "chat/body/body_innerroom_chatting.html" %}
+    {% else %}
+        {% include "chat/body/body_innerroom_post.html" %}
+    {% endif %}
+{% endblock %}
+
+<!-- body -->
+
+
+<!-- rightsidebar -->
+{% block chat_friend_info %}
+    {% include "chat/rightsidebar/right_innerroom.html" %}
+{% endblock %}
+<!-- rightsidebar -->
+
+
+    
